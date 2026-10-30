@@ -1,0 +1,965 @@
+<!-- ======================================================================== 
+ROLESTUDIO — Main Embed for Google Sites (Fixed)
+======================================================================== -->
+<div id="rs-root">
+<style> 
+#rs-root, #rs-root * { box-sizing: border-box; } 
+#rs-root { 
+--bg: #0c0e18; 
+--surface: #14172a; 
+--surface-2: #1b1f38; 
+--border: #2a2e4d; 
+--text: #e7e9f5; 
+--muted: #8a8fb0; 
+--violet: #9061f9; 
+--violet-dim: #6d46c9; 
+--cyan: #35e0d0; 
+--danger: #f9707a; 
+--font-display: 'Fraunces', Georgia, serif; 
+--font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+font-family: var(--font-body); 
+background: var(--bg); 
+color: var(--text); 
+border-radius: 18px; 
+overflow: hidden; 
+border: 1px solid var(--border); 
+min-height: 780px; 
+display: flex; 
+position:relative; 
+} 
+#rs-root a { color: var(--cyan); } 
+
+/* sidebar */ 
+#rs-root .rs-sidebar { 
+width: 232px; 
+flex-shrink: 0; 
+background: var(--surface); 
+border-right: 1px solid var(--border); 
+padding: 22px 14px; 
+display: flex; 
+flex-direction: column; 
+gap: 4px; 
+} 
+#rs-root .rs-brand { 
+font-family: var(--font-display); 
+font-size: 1.5rem; 
+font-weight: 600; 
+color: var(--violet); 
+margin: 0 6px 18px; 
+letter-spacing: 0.3px; 
+} 
+#rs-root .rs-nav-label { 
+font-size: 0.68rem; 
+letter-spacing: 1.6px; 
+text-transform: uppercase; 
+color: var(--cyan); 
+margin: 16px 8px 6px; 
+font-weight: 600; 
+} 
+#rs-root .rs-nav-btn { 
+display: flex; 
+align-items: center; 
+gap: 10px; 
+width: 100%; 
+text-align: left; 
+background: none; 
+border:none; 
+color: var(--muted); 
+padding: 9px 10px; 
+border-radius: 9px; 
+font-size: 0.9rem; 
+cursor: pointer; 
+transition: 0.15s; 
+font-family: var(--font-body); 
+} 
+#rs-root .rs-nav-btn:hover { background: var(--surface-2); color: var(--text); } 
+#rs-root .rs-nav-btn.active { background: var(--surface-2); color: var(--cyan); } 
+#rs-root .rs-auth-box { 
+margin-top: self; 
+padding-top: 14px; 
+border-top: 1px solid var(--border); 
+} 
+#rs-root .rs-user-pill { 
+display: flex; align-items: center; gap: 8px; 
+font-size: 0.8rem; color: var(--muted); padding: 6px 8px; overflow: hidden; text-overflow: ellipsis; 
+} 
+#rs-root .rs-user-pill strong { color: var(--text); font-weight: 600; } 
+
+/* main */ 
+#rs-root .rs-main { 
+flex: 1; 
+padding: 34px 40px; 
+overflow-y: self; 
+height: 100%; 
+} 
+#rs-root h1.rs-title { 
+font-family: var(--font-display); 
+font-size: 2rem; 
+margin: 0 0 6px; 
+color: var(--text); 
+} 
+#rs-root .rs-subtitle { color: var(--muted); margin: 0 0 26px; font-size: 0.95rem; } 
+#rs-root .rs-section { display: none; } 
+#rs-root .rs-section.active { display: block; } 
+
+#rs-root label { 
+display: block; 
+font-size: 0.78rem; 
+color: var(--cyan); 
+margin-bottom: 6px; 
+font-weight: 600; 
+letter-spacing: 0.3px; 
+} 
+#rs-root input[type=text], #rs-root input[type=email], #rs-root input[type=password], 
+#rs-root textarea, #rs-root select { 
+width: 100%; 
+background: var(--surface-2); 
+border: 1px solid var(--border); 
+border-radius: 10px; 
+padding: 10px 12px; 
+color: var(--text); 
+font-size: 0.9rem; 
+font-family: var(--font-body); 
+outline: none; 
+transition: 0.15s; 
+} 
+#rs-root input:focus, #rs-root textarea:focus, #rs-root select:focus { border-color: var(--violet); } 
+#rs-root .rs-field { margin-bottom: 16px; } 
+#rs-root .rs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; } 
+@media (max-width: 720px) { #rs-root .rs-grid { grid-template-columns: 1fr; } } 
+
+#rs-root button.rs-btn { 
+background: var(--violet); 
+color: #fff; 
+border:none; 
+padding: 10px 20px; 
+border-radius: 10px; 
+font-size: 0.88rem; 
+font-weight: 600; 
+cursor: pointer; 
+transition: 0.15s; 
+font-family: var(--font-body); 
+} 
+#rs-root button.rs-btn:hover { background: var(--violet-dim); } 
+#rs-root button.rs-btn-ghost { 
+background: none; 
+border: 1px solid var(--border); 
+color: var(--muted); 
+padding: 10px 18px; 
+border-radius: 10px; 
+cursor: pointer; 
+font-size: 0.88rem; 
+} 
+#rs-root button.rs-btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); } 
+#rs-root button.rs-btn-danger { 
+background: none; border: 1px solid #f9707a55; color: var(--danger); 
+padding: 6px 12px; border-radius: 8px; font-size: 0.78rem; cursor: pointer; 
+} 
+#rs-root button.rs-btn-danger:hover { background: #f9707a15; } 
+
+#rs-root .rs-card { 
+background: var(--surface); 
+border: 1px solid var(--border); 
+border-radius: 14px; 
+padding: 18px 20px; 
+margin-bottom: 14px; 
+} 
+#rs-root .rs-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; } 
+#rs-root .rs-card h3 { margin: 0 0 4px; font-size: 1.02rem; } 
+#rs-root .rs-meta { color: var(--muted); font-size: 0.76rem; } 
+
+#rs-root .rs-tag { 
+font-size: 0.7rem; padding: 3px 10px; border-radius: 20px; 
+border: 1px solid var(--border); color: var(--muted); white-space: nowrap; font-weight: 600; 
+} 
+#rs-root .rs-tag.pending { color: #fbbf24; border-color: #fbbf2455; background: #fbbf2410; } 
+#rs-root .rs-tag.valuation { color: #f472b6; border-color: #f472b655; background: #f472b610; } 
+#rs-root .rs-tag.progress { color: var(--cyan); border-color: #35e0d055; background: #35e0d010; } 
+#rs-root .rs-tag.finished { color: #4ade80; border-color: #4ade8055; background: #4ade8010; } 
+
+#rs-root .rs-empty { color: var(--muted); font-size: 0.88rem; padding: 24px 0; text-align: center; } 
+#rs-root .rs-status-msg { font-size: 0.82rem; color: var(--muted); min-height: 1.2em; margin-top: 6px; } 
+#rs-root .rs-status-msg.ok { color: #4ade80; } 
+#rs-root .rs-status-msg.err { color: var(--danger); } 
+
+#rs-ticket-box { 
+display: none; 
+background: #1b1f38; 
+border: 2px dashed var(--cyan); 
+border-radius: 12px; 
+padding: 20px; 
+margin-top: 20px; 
+text-align: center; 
+} 
+#rs-ticket-box.active { display: block; } 
+#rs-ticket-number { 
+font-size: 2.2rem; 
+font-family: var(--font-display); 
+color: var(--cyan); 
+margin: 8px 0; 
+letter-spacing: 2px; 
+} 
+
+#rs-root .rs-builder-tabs { 
+display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; 
+border-bottom: 1px solid var(--border); padding-bottom: 12px; 
+} 
+#rs-root .rs-builder-tab { 
+background: var(--surface-2); border: 1px solid var(--border); color: var(--muted); 
+padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; 
+} 
+#rs-root .rs-builder-tab.active { border-color: var(--cyan); color: var(--text); background: var(--surface); } 
+#rs-root .rs-builder-section { display: none; } 
+#rs-root .rs-builder-section.active { display: block; } 
+
+/* modals */ 
+#rs-root .rs-modal { 
+display: none; position: absolute; inset: 0; 
+background: rgba(6,7,14,0.85); backdrop-filter: blur(4px); align-items: center; justify-content: center; z-index: 50; 
+} 
+#rs-root .rs-modal.open { display: flex; } 
+#rs-root .rs-modal-box { 
+background: var(--surface); border: 1px solid var(--border); 
+border-radius: 16px; padding: 26px; width: 100%; max-width: 360px; position:relative; 
+} 
+#rs-root .rs-modal-box.wide { max-width: 650px; } 
+#rs-root .rs-modal-close { 
+position: absolute; top: 12px; right: 14px; background: none; border:none; 
+color: var(--muted); font-size: 1.2rem; cursor: pointer; 
+} 
+#rs-root .rs-tabs { display: flex; gap: 6px; margin-bottom: 16px; } 
+#rs-root .rs-tab-btn { 
+flex: 1; background: none; border: 1px solid var(--border); color: var(--muted); 
+padding: 8px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; 
+} 
+#rs-root .rs-tab-btn.active { border-color: var(--violet); color: var(--text); background: var(--surface-2); } 
+
+#rs-root pre.rs-json-viewer { 
+background: var(--bg); 
+border: 1px solid var(--border); 
+border-radius: 10px; 
+padding: 14px; 
+max-height: 380px; 
+overflow-y: self; 
+font-size: 0.8rem; 
+color: var(--cyan); 
+margin: 14px 0; 
+text-align: left; 
+}
+</style>
+
+<div class="rs-sidebar"> 
+<div class="rs-brand">RoleStudio</div> 
+
+<button class="rs-nav-btn active" data-target="dashboard" onclick="RS.nav('dashboard')">🏠 Home</button> 
+
+<div class="rs-nav-label">Community</div> 
+<button class="rs-nav-btn" data-target="request" onclick="RS.nav('request')">✉️ Request a bot</button> 
+<button class="rs-nav-btn" data-target="consult" onclick="RS.nav('consult')">🔍 Consult my request</button> 
+<button class="rs-nav-btn" data-target="publications" onclick="RS.nav('publications')">📰 Publications</button> 
+
+<div class="rs-nav-label" id="rs-admin-label" style="display:none;">Study</div> 
+<button class="rs-nav-btn" id="rs-nav-requests" style="display:none;" data-target="requests" onclick="RS.nav('requests')">📥 Requests received</button> 
+<button class="rs-nav-btn" id="rs-nav-misbots" style="display:none;" data-target="misbots" onclick="RS.nav('misbots')">🤖 My bots</button> 
+
+<div class="rs-auth-box" id="rs-auth-box"> 
+<button class="rs-btn-ghost" style="width:100%;" onclick="RS.openAuth()">Log in</button>
+</div>
+</div>
+
+<div class="rs-main">
+
+<!-- DASHBOARD -->
+<div class="rs-section active" id="rs-sec-dashboard">
+<h1 class="rs-title">Welcome to RoleStudio</h1>
+<p class="rs-subtitle">Request a custom bot or check the status of your requests using your ticket number.</p>
+<div class="rs-grid">
+<div class="rs-card">
+<h3>✉️ Want a custom-made bot?</h3>
+<p class="rs-meta" style="margin-bottom:12px;">Design the full profile using our advanced builder.</p>
+<button class="rs-btn" onclick="RS.nav('solicitar')">Create request</button>
+</div>
+<div class="rs-card"><h3>🔍 Have you already sent your request?</h3> 
+<p class="rs-meta" style="margin-bottom:12px;">Checks if it is pending, in progress or finished.</p> 
+<button class="rs-btn-ghost" onclick="RS.nav('consult')">Check status</button> 
+</div> 
+</div> 
+</div> 
+
+<!-- REQUEST BOT --> 
+<div class="rs-section" id="rs-sec-request"> 
+<h1 class="rs-title">Character Builder</h1> 
+<p class="rs-subtitle">Build a character profile and submit it for creation.</p> 
+
+<div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;"> 
+<button class="rs-btn-ghost" onclick="RS.clearRequestBuilder()">Clear all</button> 
+</div> 
+
+<div class="rs-card" style="margin-bottom: 20px;"> 
+<h3 style="margin-bottom: 10px;">📋 Contact details</h3> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Your Name / Username</label><input type="text" id="rq-author" placeholder="Your name"></div> 
+<div class="rs-field"><label>Contact (Email / Discord)</label><input type="text" id="rq-contact" placeholder="To notify you"></div> 
+</div> 
+</div> 
+
+<div class="rs-builder-tabs"> 
+<button class="rs-builder-tab active" onclick="RS.switchBuilderTab('basics')">👤 Basics</button> 
+<button class="rs-builder-tab" onclick="RS.switchBuilderTab('personality')">🧠 Personality</button> 
+<button class="rs-builder-tab" onclick="RS.switchBuilderTab('communication')">💬 Communication</button> 
+<button class="rs-builder-tab" onclick="RS.switchBuilderTab('appearance')">⚔️ Appearance</button> 
+<button class="rs-builder-tab" onclick="RS.switchBuilderTab('skills')">📖 Skills</button> 
+<button class="rs-builder-tab" onclick="RS.switchBuilderTab('background')">💭 Background</button> 
+</div> 
+
+<!-- 1. BASICS --> 
+<div class="rs-builder-section active" id="b-sec-basics"> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Character name</label><input type="text" id="b-name"></div> 
+<div class="rs-field"><label>Age</label><input type="text" id="b-age"></div> 
+<div class="rs-field"><label>Gender</label><input type="text" id="b-gender"></div> 
+<div class="rs-field"><label>Secondary gender</label><input type="text" id="b-sec-gender"></div> 
+<div class="rs-field"><label>Sexuality</label><input type="text" id="b-sexuality"></div> 
+<div class="rs-field"><label>Species / Race</label><input type="text" id="b-species"></div> 
+<div class="rs-field"><label>Occupation / Role</label><input type="text" id="b-occupation"></div> 
+<div class="rs-field"><label>Alignment / Affiliation</label><input type="text" id="b-alignment"></div> 
+</div> 
+<div class="rs-field"><label>Short introduction</label><textarea id="b-intro" rows="2"></textarea></div> 
+</div> 
+
+<!-- 2. PERSONALITY --> 
+<div class="rs-builder-section" id="b-sec-personality"> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Archetype</label><input type="text" id="b-archetype"></div> 
+<div class="rs-field"><label>MBTI (Optional)</label><input type="text" id="b-mbti"></div> 
+</div> 
+<div class="rs-field"><label>Major personality traits</label><textarea id="b-traits" rows="2"></textarea></div> 
+<div class="rs-field"><label>Dynamics with {{user}}</label><textarea id="b-user-personality" rows="2"></textarea></div> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Goals and motivations</label><textarea id="b-goals" rows="2"></textarea></div> 
+<div class="rs-field"><label>Fears and weaknesses</label><textarea id="b-fears" rows="2"></textarea></div> 
+</div> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Pakias and habits</label><textarea id="b-quirks" rows="2"></textarea></div> 
+<div class="rs-field"><label>Internal conflict</label><textarea id="b-internal" rows="2"></textarea></div> 
+</div> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Secret</label><textarea id="b-secret" rows="2"></textarea></div> 
+<div class="rs-field"><label>Likes</label><textarea id="b-likes" rows="2"></textarea></div> 
+</div> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Dislikes</label><textarea id="b-dislikes" rows="2"></textarea></div> 
+<div class="rs-field"><label>Intimate preferences / Kinks</label><textarea id="b-kinks" rows="2"></textarea></div> 
+</div> 
+</div> 
+
+<!-- 3. COMMUNICATION --> 
+<div class="rs-builder-section" id="b-sec-communication"> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Tone of voice</label><textarea id="b-voice" rows="2"></textarea></div> 
+<div class="rs-field"><label>Terms of endearment</label><input type="text" id="b-endearment"></div> 
+</div> 
+<div class="rs-field"><label>Speech style and vocabulary</label><textarea id="b-speech" rows="3"></textarea></div> 
+<div class="rs-field"><label>Relationship with other characters</label><textarea id="b-relationships" rows="3"></textarea></div> 
+</div> 
+
+<!-- 4. APPEARANCE --> 
+<div class="rs-builder-section" id="b-sec-appearance"> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Body / Physical</label><textarea id="b-body" rows="2"></textarea></div> 
+<div class="rs-field"><label>Hair</label><input type="text" id="b-hair"></div> 
+<div class="rs-field"><label>Eyes</label><input type="text" id="b-eyes"></div> 
+<div class="rs-field"><label>Skin and Characteristic Features</label><input type="text" id="b-skin"></div> 
+<div class="rs-field"><label>Usual attire</label><textarea id="b-outfit" rows="2"></textarea></div> 
+<div class="rs-field"><label>Accessories and Inventory</label><textarea id="b-accessories" rows="2"></textarea></div> 
+<div class="rs-field"><label>Alternative Form / Transformation</label><textarea id="b-alt-form" rows="2"></textarea></div> 
+<div class="rs-field"><label>Smell / Aroma</label><input type="text" id="b-scent"></div> 
+</div> 
+<div class="rs-field"><label>Anatomy / Adult Details (Optional)</label><textarea id="b-anatomy" rows="2"></textarea></div> 
+</div> 
+
+<!-- 5. SKILLS --> 
+<div class="rs-builder-section" id="b-sec-skills"> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Professional Skills</label><textarea id="b-prof-skills" rows="3"></textarea></div> 
+<div class="rs-field"><label>Combat and tactics</label><textarea id="b-combat" rows="3"></textarea></div> 
+</div> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Supernatural Powers / Magic</label><textarea id="b-supernatural" rows="3"></textarea></div> 
+<div class="rs-field"><label>Physical limits and weaknesses</label><textarea id="b-weaknesses" rows="3"></textarea></div> 
+</div> 
+</div> 
+
+<!-- 6. BACKGROUND --> 
+<div class="rs-builder-section" id="b-sec-background"> 
+<div class="rs-field"><label>Biography / Past</label><textarea id="b-biography" rows="4"></textarea></div> 
+<div class="rs-field"><label>Current Situation</label><textarea id="b-current-sit" rows="2"></textarea></div> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Place of residence</label><input type="text" id="b-residence"></div> 
+<div class="rs-field"><label>Personal valuables</label><input type="text" id="b-possessions"></div> 
+</div> 
+<div class="rs-field"><label>Linked NPCs</label><textarea id="b-npcs" rows="2"></textarea></div> 
+</div> 
+
+<div style="margin-top: 24px;"> 
+<button class="rs-btn" onclick="RS.submitRequest()">Submit Complete Request</button> 
+<p class="rs-status-msg" id="rq-status"></p> 
+
+<div id="rs-ticket-box"> 
+<p style="margin:0; font-size:0.9rem; color: var(--text);">Request sent successfully! Your tracking number is:</p>
+<div id="rs-ticket-number">#----</div>
+<p style="margin:0; font-size:0.8rem; color: #fbbf24;">⚠️ <strong>Save or write down this number.</strong> You will need it in the "Check Request Status" section.</p>
+</div>
+</div>
+</div>
+
+<!-- CHECK REQUEST STATUS -->
+<div class="rs-section" id="rs-sec-consultar">
+<h1 class="rs-title">Check Request Status</h1>
+<p class="rs-subtitle">Enter your ticket number (e.g., #4829) to see what stage your bot is in.</p>
+
+<div style="display: flex; gap: 10px; margin-bottom: 20px; max-width: 500px;">
+<input type="text" id="rs-ticket-search-input" placeholder="#0000" style="flex: 1; text-transform: uppercase;">
+<button class="rs-btn" onclick="RS.searchTicketState()">Check</button>
+</div>
+
+<div id="rs-consult-result"><div class="rs-empty">Enter your ticket number above.</div></div>
+</div>
+
+<!-- POSTS -->
+<div class="rs-section" id="rs-sec-publicaciones">
+<h1 class="rs-title">Posts</h1>
+<p class="rs-subtitle">Studio news and announcements.</p>
+
+<div id="rs-new-post" style="display:none;margin-bottom:22px;">
+<div class="rs-field"><label>Title</label><input type="text" id="post-title" placeholder="Post title"></div>
+<div class="rs-field"><label>Content</label><textarea id="post-content" rows="4" placeholder="Write the publication…”></textarea></div> 
+<div class="rs-field"><label>Image (URL, optional)</label><input type="text" id="post-image" placeholder="https://…"></div> 
+<button class="rs-btn" onclick="RS.submitPost()">Publish</button> 
+<p class="rs-status-msg" id="post-status"></p> 
+</div> 
+
+<div id="rs-posts-list"><div class="rs-empty">Loading posts…</div></div> 
+</div> 
+
+<!-- REQUESTS (admin) --> 
+<div class="rs-section" id="rs-sec-requests"> 
+<h1 class="rs-title">Requests received</h1> 
+<p class="rs-subtitle">Bot requests submitted by the community.</p> 
+<div id="rs-requests-list"><div class="rs-empty">Loading requests…</div></div> 
+</div> 
+
+<!-- MY BOTS (admin) --> 
+<div class="rs-section" id="rs-sec-misbots"> 
+<h1 class="rs-title">My bots</h1> 
+<p class="rs-subtitle">Your private character token store.</p> 
+
+<div class="rs-card" style="margin-bottom:22px;"> 
+<div class="rs-grid"> 
+<div class="rs-field"><label>Name</label><input type="text" id="bot-name"></div> 
+<div class="rs-field"> 
+<label>Visibility</label> 
+<select id="bot-visibility"> 
+<option value="private">🔒 Private</option> 
+<option value="public">🌐 Public</option> 
+</select> 
+</div> 
+</div> 
+<div class="rs-field"><label>Bot image (URL)</label><input type="text" id="bot-image" placeholder="https://…"></div> 
+<div class="rs-field"><label>System prompt / Summary</label><textarea id="bot-system" rows="3"></textarea></div> 
+<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;"> 
+<button class="rs-btn" onclick="RS.saveBot()">Save bot</button> 
+<button class="rs-btn-ghost" onclick="RS.clearBotForm()">Clear Form</button> 
+<span class="rs-status-msg" id="bot-status" style="min-height:auto;"></span> 
+</div> 
+</div> 
+
+<div id="rs-bots-list"><div class="rs-empty">Loading your bots…</div></div> 
+</div>
+
+</div>
+
+<!-- AUTH MODAL -->
+<div class="rs-modal" id="rs-auth-modal"> 
+<div class="rs-modal-box"> 
+<button class="rs-modal-close" onclick="RS.closeAuth()">✕</button> 
+<div class="rs-tabs"> 
+<button class="rs-tab-btn active" id="rs-tab-login" onclick="RS.showAuthTab('login')">Login</button> 
+<button class="rs-tab-btn" id="rs-tab-signup" onclick="RS.showAuthTab('signup')">Create account</button> 
+</div> 
+<div id="rs-form-login"> 
+<div class="rs-field"><input type="email" id="rs-login-email" placeholder="Email"></div> 
+<div class="rs-field"><input type="password" id="rs-login-pass" placeholder="Password"></div> 
+<button class="rs-btn" style="width:100%;" onclick="RS.login()">Enter</button> 
+</div> 
+<div id="rs-form-signup" style="display:none;"> 
+<div class="rs-field"><input type="email" id="rs-signup-email" placeholder="Email"></div> 
+<div class="rs-field"><input type="password" id="rs-signup-pass" placeholder="Password (min. 6 characters)"></div> 
+<button class="rs-btn" style="width:100%;" onclick="RS.signup()">Create account</button> 
+</div> 
+<p class="rs-status-msg" id="rs-auth-status"></p> 
+</div>
+</div>
+
+<!-- JSON VIEWER MODAL -->
+<div class="rs-modal" id="rs-json-modal"> 
+<div class="rs-modal-box wide"> 
+<button class="rs-modal-close" onclick="RS.closeJsonModal()">✕</button> 
+<h3 style="margin-top:0;">Character JSON File</h3> 
+<p class="rs-meta" style="margin-bottom:4px;">Ordered structure ready for bot platforms.</p> 
+<pre class="rs-json-viewer" id="rs-json-content">Loading...</pre> 
+<div style="display:flex; gap:10px; justify-content:flex-end;"> 
+<button class="rs-btn-ghost" onclick="RS.copyJsonToClipboard()">Copy JSON</button> 
+<button class="rs-btn" onclick="RS.downloadJsonFile()">Download file</button> 
+</div> 
+<p class="rs-status-msg" id="rs-json-status"></p> 
+</div>
+</div>
+</div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+(function(){ 
+const FIREBASE_CONFIG = { 
+apiKey: "AIzaSyAVf6-PAZNAuQFd1XHqtQviH_VIuL813G4", 
+authDomain: "roleplay-943fb.firebaseapp.com", 
+projectId: "roleplay-943fb", 
+storageBucket: "roleplay-943fb.firebasestorage.app", 
+messagingSenderId: "544326583785", 
+appId: "1:544326583785:web:2a0365fc1b2633be547778" 
+}; 
+const ADMIN_EMAIL = "leilacastroconde731@gmail.com"; 
+
+firebase.initializeApp(FIREBASE_CONFIG); 
+const auth = firebase.auth(); 
+const db = firebase.firestore(); 
+
+let currentUser = null; 
+let editingBotId = null; 
+let currentJsonDataString = ''; 
+let currentJsonFileName = 'character.json'; 
+
+window.RS = {}; 
+
+RS.nav = function(target){ 
+document.querySelectorAll('#rs-root .rs-section').forEach(s => s.classList.remove('active')); 
+document.getElementById('rs-sec-' + target).classList.add('active'); 
+document.querySelectorAll('#rs-root .rs-nav-btn').forEach(b => b.classList.toggle('active', b.dataset.target === target)); 
+if (target === 'posts') loadPosts(); 
+if (target === 'requests') loadRequests(); 
+if (target === 'mybots') loadBots(); 
+}; 
+
+RS.switchBuilderTab = function(tabId){ 
+document.querySelectorAll('#rs-root .rs-builder-section').forEach(s => s.classList.remove('active')); 
+document.querySelectorAll('#rs-root .rs-builder-tab').forEach(t => t.classList.remove('active')); 
+document.getElementById('b-sec-' + tabId).classList.add('active'); 
+if(event && event.currentTarget) event.currentTarget.classList.add('active'); 
+}; 
+
+RS.clearRequestBuilder = function(){ 
+const ids = [ 
+'rq-author','rq-contact','b-name','b-age','b-gender','b-sec-gender','b-sexuality','b-species','b-occupation','b-alignment','b-intro', 
+'b-archetype','b-mbti','b-traits','b-user-personality','b-goals','b-fears','b-quirks','b-internal','b-secret','b-likes','b-dislikes','b-kinks', 
+'b-voice','b-endearment','b-speech','b-relationships', 
+'b-body','b-hair','b-eyes','b-skin','b-outfit','b-accessories','b-alt-form','b-scent','b-anatomy', 
+'b-prof-skills','b-combat','b-supernatural','b-weaknesses', 
+'b-biography','b-current-sit','b-residence','b-possessions','b-npcs' 
+]; 
+ids.forEach(id => { 
+const el = document.getElementById(id); 
+if(el) el.value = ''; 
+}); 
+document.getElementById('rs-ticket-box').classList.remove('active'); 
+}; 
+
+RS.openAuth = function(){ document.getElementById('rs-auth-modal').classList.add('open'); }; 
+RS.closeAuth = function(){ document.getElementById('rs-auth-modal').classList.remove('open'); setAuthStatus(''); }; 
+RS.showAuthTab = function(tab){ 
+document.getElementById('rs-form-login').style.display = tab === 'login' ? '': 'none'; 
+document.getElementById('rs-form-signup').style.display = tab === 'signup' ? '': 'none'; 
+document.getElementById('rs-tab-login').classList.toggle('active', tab === 'login'); 
+document.getElementById('rs-tab-signup').classList.toggle('active', tab === 'signup'); 
+}; 
+function setAuthStatus(msg, isErr){ 
+const el = document.getElementById('rs-auth-status'); 
+el.textContent = msg || ''; 
+el.className = 'rs-status-msg' + (isErr ? ' err' : ''); 
+} 
+
+RS.login = function(){ 
+const email = document.getElementById('rs-login-email').value.trim(); 
+const pass = document.getElementById('rs-login-pass').value; 
+if (!email || !pass) return setAuthStatus('Fill in email and password.', true); 
+auth.signInWithEmailAndPassword(email, pass).then(() => RS.closeAuth()).catch(e => setAuthStatus(e.message, true)); 
+}; 
+RS.signup = function(){ 
+const email = document.getElementById('rs-signup-email').value.trim(); 
+const pass = document.getElementById('rs-signup-pass').value; 
+if (!email || pass.length < 6) return setAuthStatus('Valid email and password of 6+ characters.', true); 
+auth.createUserWithEmailAndPassword(email, pass).then(() => RS.closeAuth()).catch(e => setAuthStatus(e.message, true)); 
+}; 
+RS.logout = function(){ auth.signOut(); }; 
+
+auth.onAuthStateChanged(function(user){ 
+currentUser = user; 
+const isAdmin = !!(user && user.email === ADMIN_EMAIL); 
+const authBox = document.getElementById('rs-auth-box'); 
+if (user){ 
+authBox.innerHTML = '<div class="rs-user-pill">👤 <strong>' + escapeHtml(user.email||'User') + 
+'</strong></div><button class="rs-btn-ghost" style="width:100%;margin-top:6px;" onclick="RS.logout()">Logout</button>'; 
+} else { 
+authBox.innerHTML = '<button class="rs-btn-ghost" style="width:100%;" onclick="RS.openAuth()">Login</button>'; 
+} 
+document.getElementById('rs-admin-label').style.display = isAdmin ? '': 'none'; 
+document.getElementById('rs-nav-requests').style.display = isAdmin ? '': 'none'; 
+document.getElementById('rs-nav-misbots').style.display = isAdmin ? '': 'none'; 
+document.getElementById('rs-new-post').style.display = isAdmin ? '': 'none'; 
+}); 
+
+RS.submitRequest = function(){ 
+const name = document.getElementById('b-name').value.trim(); 
+const author = document.getElementById('rq-author').value.trim(); 
+const statusEl = document.getElementById('rq-status'); 
+if (!name || !author){ 
+statusEl.textContent = 'Indicate at least your name and the name of the character (in Basic).'; 
+statusEl.className = 'rs-status-msg err'; 
+return; 
+} 
+
+const ticketNumber = '#' + Math.floor(1000 + Math.random() * 9000); 
+
+const payload = { 
+author: author, 
+contact: document.getElementById('rq-contact').value.trim(), 
+ticketNumber: ticketNumber, 
+basics: { 
+name: name, age: document.getElementById('b-age').value.trim(), 
+gender: document.getElementById('b-gender').value.trim(), secGender: document.getElementById('b-sec-gender').value.trim(), 
+sexuality: document.getElementById('b-sexuality').value.trim(), species: document.getElementById('b-species').value.trim(), 
+occupation: document.getElementById('b-occupation').value.trim(), alignment: document.getElementById('b-alignment').value.trim(), 
+intro: document.getElementById('b-intro').value.trim() 
+}, 
+personality: { 
+archetype: document.getElementById('b-archetype').value.trim(), mbti: document.getElementById('b-mbti').value.trim(), 
+traits: document.getElementById('b-traits').value.trim(), userPersonality: document.getElementById('b-user-personality').value.trim(), 
+goals: document.getElementById('b-goals').value.trim(), fears: document.getElementById('b-fears').value.trim(), 
+quirks: document.getElementById('b-quirks').value.trim(), internal: document.getElementById('b-internal').value.trim(), 
+secret: document.getElementById('b-secret').value.trim(), likes: document.getElementById('b-likes').value.trim(), 
+dislikes: document.getElementById('b-kinks').value.trim(), kinks: document.getElementById('b-kinks').value.trim() 
+}, 
+communication: { 
+voice: document.getElementById('b-voice').value.trim(), endearment: document.getElementById('b-endearment').value.trim(), 
+speech: document.getElementById('b-speech').value.trim(), relationships: document.getElementById('b-relationships').value.trim() 
+}, 
+appearance: { 
+body: document.getElementById('b-body').value.trim(), hair: document.getElementById('b-hair').value.trim(), 
+eyes: document.getElementById('b-eyes').value.trim(), skin: document.getElementById('b-skin').value.trim(), 
+outfit: document.getElementById('b-outfit').value.trim(), accessories: document.getElementById('b-accessories').value.trim(), 
+altForm: document.getElementById('b-alt-form').value.trim(), scent: document.getElementById('b-scent').value.trim(), 
+anatomy: document.getElementById('b-anatomy').value.trim() 
+}, 
+skills: { 
+profSkills: document.getElementById('b-prof-skills').value.trim(), combat: document.getElementById('b-combat').value.trim(), 
+supernatural: document.getElementById('b-supernatural').value.trim(), weaknesses: document.getElementById('b-weaknesses').value.trim() 
+}, 
+background: { 
+biography: document.getElementById('b-biography').value.trim(), currentSit: document.getElementById('b-current-sit').value.trim(), 
+residence: document.getElementById('b-residence').value.trim(), possessions: document.getElementById('b-possessions').value.trim(), 
+npcs: document.getElementById('b-npcs').value.trim() 
+}, 
+uid: currentUser ? currentUser.uid : null, 
+status: 'pending', 
+createdAt: firebase.firestore.FieldValue.serverTimestamp() 
+}; 
+
+db.collection('requests').add(payload).then(() => { 
+statusEl.textContent = ''; 
+document.getElementById('rs-ticket-number').textContent = ticketNumber; 
+document.getElementById('rs-ticket-box').classList.add('active');
+
+// --- ADD THIS HERE --- 
+fetch("https://hook.eu1.make.com/1j8ykja5qqzmqb9xcjj9n6lz51mf4ngi", { 
+method: "POST", 
+headers: { "Content-Type": "application/json" }, 
+body: JSON.stringify(payload) 
+}).catch(err => console.error("Error sending to Make:", err)); 
+// ----------------------- 
+
+}).catch(e => { 
+statusEl.textContent = 'Error sending: ' + e.message; 
+statusEl.className = 'rs-status-msg err'; 
+}); 
+}; 
+
+function formatDate(timestamp){ 
+if (!timestamp) return 'Recent'; 
+try { 
+const date = timestamp.toDate(); 
+return date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }); 
+} catch(e) { 
+return 'Recent'; 
+} 
+} 
+
+// Optimized direct search 
+RS.searchTicketState = function(){ 
+let query = document.getElementById('rs-ticket-search-input').value.trim(); 
+const resultBox = document.getElementById('rs-consult-result'); 
+if (!query) { 
+resultBox.innerHTML = '<div class="rs-empty">Enter a valid ticket number (e.g. #4829).</div>'; 
+return; 
+} 
+if (!query.startsWith('#')) query = '#' + query; 
+
+resultBox.innerHTML = '<div class="rs-empty">Searching for ticket…</div>'; 
+
+db.collection('requests').where('ticketNumber', '==', query.toUpperCase()).get().then(snap => { 
+if (snap.empty) { 
+resultBox.innerHTML = '<div class="rs-empty">No request found with ticket ' + escapeHtml(query) + '.</div>'; 
+return; 
+} 
+
+const doc = snap.docs[0]; 
+const found = doc.data(); 
+const charName = found.basics && found.basics.name ? found.basics.name : 'No name'; 
+
+resultBox.innerHTML = 
+'<div class="rs-card">' + 
+'<div class="rs-card-top"><div><h3>' + escapeHtml(charName) + ' <span style="color:var(--cyan);">' + escapeHtml(found.ticketNumber) + '</span></h3>' + 
+'<span class="rs-meta">By: ' + escapeHtml(found.author || 'Anonymous') + ' • 📅 ' + formatDate(found.createdAt) + '</span></div>' + 
+'<span class="rs-tag ' + found.status + '">' + statusLabel(found.status) + '</span></div>' + 
+(found.basics && found.basics.intro ? '<p style="margin:12px 0 0;font-size:0.9rem;"><strong>Introduction:</strong> ' + escapeHtml(found.basics.intro) + '</p>' : '') + 
+'</div>'; 
+}).catch(e => { 
+console.error(e); 
+resultBox.innerHTML = '<div class="rs-empty" style="color:var(--danger);">Error querying ticket.</div>'; 
+}); 
+}; 
+
+function loadRequests(){ 
+const list = document.getElementById('rs-requests-list'); 
+db.collection('requests').orderBy('createdAt', 'desc').get().then(snap => { 
+if (snap.empty){ list.innerHTML = '<div class="rs-empty">No requests yet.</div>'; return; } 
+list.innerHTML = ''; 
+snap.forEach(doc => { 
+const d = doc.data(); 
+const card = document.createElement('div'); 
+card.className = 'rs-card'; 
+const charName = d.basics && d.basics.name ? d.basics.name : (d.name || 'No name'); 
+const ticket = d.ticketNumber || '#----'; 
+
+card.innerHTML = 
+'<div class="rs-card-top"><div><h3>' + escapeHtml(charName) + ' <span style="color:var(--cyan);font-weight:600;">(' + escapeHtml(ticket) + ')</span></h3>' + 
+'<span class="rs-meta">By: ' + escapeHtml(d.author || 'Anonymous') + ' (' + escapeHtml(d.contact || 'no contact') + ') • 📅 ' + formatDate(d.createdAt) + '</span></div>' + 
+'<span class="rs-tag ' + d.status + '">' + statusLabel(d.status) + '</span></div>' + 
+(d.basics && d.basics.intro ? '<p style="margin:8px 0;font-size:0.88rem;">' + escapeHtml(d.basics.intro) + '</p>' : '') + 
+'<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">' + 
+statusButtons(doc.id, d.status) + 
+'<button class="rs-btn-ghost" onclick="RS.viewRequestJson(\'' + doc.id + '\')">View JSON</button>' + 
+'<button class="rs-btn-danger" onclick="RS.deleteRequest(\'' + doc.id + '\')">Delete</button></div>'; 
+list.appendChild(card); 
+}); 
+}); 
+} 
+
+function statusLabel(s){ 
+if (s === 'rating') return 'In rating'; 
+if (s === 'progress') return 'In progress'; 
+if (s === 'finished') return 'Finished'; 
+return 'Pending'; 
+} 
+
+function statusButtons(id, current){ 
+const opts = ['pending', 'rating', 'progress', 'finished']; 
+return opts.filter(o => o !== current).map(o => 
+'<button class="rs-btn-ghost" onclick="RS.setRequestStatus(\'' + id + '\',\'' + o + '\')">' + statusLabel(o) + '</button>' 
+).join(''); 
+} 
+
+RS.setRequestStatus = function(id, status){ 
+db.collection('requests').doc(id).update({ status: status }).then(() => { 
+loadRequests(); 
+}); 
+}; 
+
+RS.deleteRequest = function(id){ 
+if (confirm('Are you sure you want to delete this request?')) { 
+db.collection('requests').doc(id).delete().then(() => { 
+loadRequests(); 
+}); 
+} 
+}; 
+
+RS.viewRequestJson = function(id) { 
+db.collection('requests').doc(id).get().then(doc => { 
+if (!doc.exists) return; 
+const d = doc.data(); 
+
+const orderedJson = { 
+ticketNumber: d.ticketNumber || "Without number", 
+author: d.author || "Anonymous", 
+contact: d.contact || "No contact", 
+status: d.status || "pending", 
+basics: d.basics || {}, 
+personality: d.personality || {}, 
+communication: d.communication || {}, 
+appearance: d.appearance || {}, 
+skills: d.skills || {}, 
+background: d.background || {} 
+}; 
+
+currentJsonDataString = JSON.stringify(orderedJson, null, 2); 
+currentJsonFileName = `request_${(d.basics && d.basics.name ? d.basics.name : 'character').toLowerCase().replace(/\s+/g, '_')}.json`; 
+
+document.getElementById('rs-json-content').textContent = currentJsonDataString; 
+document.getElementById('rs-json-status').textContent = ''; 
+document.getElementById('rs-json-modal').classList.add('open'); 
+}); 
+}; 
+
+RS.closeJsonModal = function(){ document.getElementById('rs-json-modal').classList.remove('open'); }; 
+
+RS.copyJsonToClipboard = function(){ 
+navigator.clipboard.writeText(currentJsonDataString).then(() => { 
+const st = document.getElementById('rs-json-status'); 
+st.textContent = 'JSON copied to clipboard!'; 
+st.className = 'rs-status-msg ok'; 
+}); 
+}; 
+
+RS.downloadJsonFile = function(){ 
+const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(currentJsonDataString); 
+const downloadAnchor = document.createElement('a'); 
+downloadAnchor.setAttribute("href", dataStr); 
+downloadAnchor.setAttribute("download", currentJsonFileName); 
+document.body.appendChild(downloadAnchor); 
+downloadAnchor.click(); 
+downloadAnchor.remove(); 
+}; 
+
+function loadPosts(){ 
+const list = document.getElementById('rs-posts-list'); 
+db.collection('posts').orderBy('createdAt', 'desc').get().then(snap => { 
+if (snap.empty){ list.innerHTML = '<div class="rs-empty">No posts yet.</div>'; return; } 
+list.innerHTML = ''; 
+snap.forEach(doc => { 
+const p = doc.data(); 
+constcard = document.createElement('div'); 
+card.className = 'rs-card'; 
+card.innerHTML = '<h3>' + escapeHtml(p.title) + '</h3>' + 
+(p.image ? '<img src="' + escapeHtml(p.image) + '" style="max-width:100%;border-radius:8px;margin:8px 0;" />' : '') + 
+'<p style="font-size:0.9rem;white-space:pre-wrap;margin:8px 0;">' + escapeHtml(p.content) + '</p>' + 
+(currentUser && currentUser.email === ADMIN_EMAIL ? '<button class="rs-btn-danger" onclick="RS.deletePost(\'' + doc.id + '\')">Delete</button>' : ''); 
+list.appendChild(card); 
+}); 
+}); 
+} 
+
+RS.submitPost = function(){ 
+const title = document.getElementById('post-title').value.trim(); 
+const content = document.getElementById('post-content').value.trim(); 
+const image = document.getElementById('post-image').value.trim(); 
+const statusEl = document.getElementById('post-status'); 
+if (!title || !content){ 
+statusEl.textContent = 'Fill in the title and content.'; 
+statusEl.className = 'rs-status-msg err'; 
+return; 
+} 
+db.collection('posts').add({ 
+title: title, content: content, image: image, 
+createdAt: firebase.firestore.FieldValue.serverTimestamp() 
+}).then(() => { 
+statusEl.textContent = 'Post created.'; 
+statusEl.className = 'rs-status-msg ok'; 
+document.getElementById('post-title').value = ''; 
+document.getElementById('post-content').value = ''; 
+document.getElementById('post-image').value = ''; 
+loadPosts(); 
+}); 
+}; 
+
+RS.deletePost = function(id){ 
+if (confirm('Delete post?')) { 
+db.collection('posts').doc(id).delete().then(() => loadPosts()); 
+} 
+}; 
+
+function loadBots(){ 
+const list = document.getElementById('rs-bots-list'); 
+if (!currentUser) { list.innerHTML = '<div class="rs-empty">Sign in to see your bots.</div>'; return; } 
+db.collection('bots').where('uid', '==', currentUser.uid).get().then(snap => { 
+if (snap.empty){ list.innerHTML = '<div class="rs-empty">You have no saved bot.</div>'; return; } 
+list.innerHTML = ''; 
+snap.forEach(doc => { 
+const b = doc.data(); 
+const card = document.createElement('div'); 
+card.className = 'rs-card'; 
+card.innerHTML = '<div class="rs-card-top"><h3>' + escapeHtml(b.name) + '</h3><span class="rs-tag">' + b.visibility + '</span></div>' + 
+(b.system ? '<p style="font-size:0.85rem;margin:6px 0;">' + escapeHtml(b.system) + '</p>' : '') + 
+'<div style="display:flex;gap:8px;margin-top:10px;"><button class="rs-btn-ghost" onclick="RS.editBot(\'' + doc.id + '\')">Edit</button>' + 
+'<button class="rs-btn-danger" onclick="RS.deleteBot(\'' + doc.id + '\')">Delete</button></div>'; 
+list.appendChild(card); 
+}); 
+}); 
+} 
+
+RS.saveBot = function(){ 
+const name = document.getElementById('bot-name').value.trim(); 
+const visibility = document.getElementById('bot-visibility').value; 
+const image = document.getElementById('bot-image').value.trim(); 
+const system = document.getElementById('bot-system').value.trim(); 
+const statusEl = document.getElementById('bot-status'); 
+if (!name){ statusEl.textContent = 'Indicates a name.'; statusEl.className = 'rs-status-msg err'; return; } 
+if (!currentUser){ statusEl.textContent = 'You must log in.'; statusEl.className = 'rs-status-msg err'; return; } 
+
+const data = { name: name, visibility: visibility, image: image, system: system, uid: currentUser.uid }; 
+const promise = editingBotId ? db.collection('bots').doc(editingBotId).update(data) : db.collection('bots').add({...data, createdAt: firebase.firestore.FieldValue.serverTimestamp()}); 
+
+promise.then(() => { 
+statusEl.textContent = 'Successfully saved.'; 
+statusEl.className = 'rs-status-msg ok'; 
+RS.clearBotForm(); 
+loadBots(); 
+}); 
+}; 
+
+RS.clearBotForm = function(){ 
+editingBotId = null; 
+document.getElementById('bot-name').value = ''; 
+document.getElementById('bot-image').value = ''; 
+document.getElementById('bot-system').value = ''; 
+}; 
+
+RS.editBot = function(id){ 
+db.collection('bots').doc(id).get().then(doc => { 
+if(!doc.exists) return; 
+const b = doc.data(); 
+editingBotId = id; 
+document.getElementById('bot-name').value = b.name || ''; 
+document.getElementById('bot-visibility').value = b.visibility || 'private'; 
+document.getElementById('bot-image').value = b.image || ''; 
+document.getElementById('bot-system').value = b.system || ''; 
+RS.nav('mybots'); 
+}); 
+}; 
+
+RS.deleteBot = function(id){ 
+if(confirm('Delete this bot?')) { 
+db.collection('bots').doc(id).delete().then(() => loadBots()); 
+} 
+}; 
+
+function escapeHtml(str){ 
+if(!str) return ''; 
+return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;"); 
+}
+
+})();
+</script>
